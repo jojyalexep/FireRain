@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "SendSMS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Send SMS</h2>
+
+
+
+
+<fieldset>
+        <legend>Log in Form</legend>
+        <ol>
+            <li>
+                Data Excel File
+               <input type="file" name="ExcelFile" value=" " />
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </li>
+            <li>
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+            </li>
+        </ol>
+        <input type="submit" value="Log in" />
+    </fieldset>

@@ -1,0 +1,85 @@
+﻿@model IEnumerable<EP.BulkMessage.Service.Entity.Sms>
+
+<h2>Sms List</h2>
+<div id="divCampaigns">
+    <table>
+        <tr>
+            <th>
+               Id
+            </th>
+            <th>
+               Sms To
+            </th>
+            <th>
+                Date
+            </th>
+            <th></th>
+            <th>
+               Status
+            </th>
+            
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td width="50px">
+                    SMS-@Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td width="150px">
+                    @Html.DisplayFor(modelItem => item.ToNumber)
+                </td>
+                <td width="250px">
+                    @Html.DisplayFor(modelItem => item.StatusDate)
+                </td>
+                 <td width="100px">
+                    <a onclick="ShowMessage(this);">View Message</a>
+                    @Html.Hidden("Body", item.Content)
+                </td>
+                <td>
+                 @switch (item.StatusId)
+                    {
+                        case ((int)EP.BulkMessage.Service.Entity.Enum.MessageStatus.New):
+                            {
+                        @:<img src="@Url.Content("~/Images/new.png")" width="20" height="20" title="New" />        
+                                break;
+                            }
+
+                        case ((int)EP.BulkMessage.Service.Entity.Enum.MessageStatus.Send):
+                            {
+                        @:<img src="@Url.Content("~/Images/task_completed.png")" width="20" height="20" title="Send" />        
+                                break;
+                            }
+
+                        case ((int)EP.BulkMessage.Service.Entity.Enum.MessageStatus.Failed):
+                            {
+                        @:<img src="@Url.Content("~/Images/delete.png")" width="20" height="20" title="Failed" />
+                                break;
+                            }
+                    }
+                </td>
+                
+            </tr>
+        }
+
+    </table>
+</div>
+<div id="dialogMessage" class="dialog">
+
+
+    <b>Content:</b>
+    <span id="dlgBody"></span>
+
+</div>
+<script>
+    function ShowMessage(element) {
+        var body = $(element).siblings("[name='Body']").val();
+        $("#dlgBody").html(body);
+        $("#dialogMessage").dialog({ width: 900 });
+    }
+
+
+
+
+</script>
+

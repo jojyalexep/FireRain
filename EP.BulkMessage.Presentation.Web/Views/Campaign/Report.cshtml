@@ -1,0 +1,78 @@
+﻿@model EP.BulkMessage.Presentation.Web.Validation.CampaignValidation
+
+@{
+    ViewBag.Title = "ImportReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int count = 1;
+}
+
+<h2>Campaign Validation Report</h2>
+@using (Html.BeginForm("Save", "Campaign"))
+{
+    <fieldset>
+        <legend>Campaign Validation</legend>
+
+        <div class="display-label">
+            Total Records:
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.TotalRecordCount)
+        </div>
+
+        <div class="display-label">
+            Records Failed:
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.TotalRecordFailed)
+        </div>
+        <div class="form-button">
+            @if (Model.IsValid)
+            {
+                <input type="submit" value="Submit" />
+            }
+            else
+            {
+                <h3 style="color: red">Not Valid</h3>
+                <br />
+            }
+
+            <input type="button" onclick="history.back()" value="Cancel" />
+        </div>
+    </fieldset>
+}
+@if (Model.Messages.Any())
+{
+    <h2>Error Report</h2>
+    <table>
+        <tr>
+            <th>Sl. No
+            </th>
+            <th>Field
+            </th>
+            <th>Row Number
+            </th>
+            <th>Error Message
+            </th>
+
+        </tr>
+        @foreach (var item in Model.Messages)
+        {
+            <tr>
+                <td width="50px">@count
+                </td>
+                <td width="100px">
+                    @Html.DisplayFor(modelItem => item.ErrorInput)
+                </td>
+                <td width="100px">
+                    @Html.DisplayFor(modelItem => item.RowNumber)
+                </td>
+
+                <td width="400px">
+                    @Html.DisplayFor(modelItem => item.Message)
+                </td>
+
+            </tr>
+            count += 1;
+        }
+    </table>
+}

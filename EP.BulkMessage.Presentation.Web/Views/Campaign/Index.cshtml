@@ -1,0 +1,283 @@
+﻿@model IEnumerable<EP.BulkMessage.Presentation.Web.ViewModel.CampaignVM>
+
+@{
+    ViewBag.Title = "Campaigns";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+
+    @Styles.Render("~/Content/themes/base/css")
+    <link href="~/Content/jquery.timepicker.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.timepicker.min.js"></script>
+    <script src="~/Scripts/campaign-main.js"></script>
+    <script>
+     
+
+        
+    </script>
+}
+
+@if (ViewBag.Message != null)
+{
+    @section featured {
+        <section class="featured">
+            <div class="content-wrapper">
+                @ViewBag.Message
+            </div>
+        </section>
+    }
+}
+<div class="action-menu">
+    @if (UserPermission.UserHasPermission(UserPermission.CreateCampaignPermission))
+    {
+        <text>@Html.ActionLink("Create New", "Create")</text>
+    }
+</div>
+<br />
+<br />
+<h2>Campaigns </h2>
+
+
+<div id="divCampaigns">
+    @if (Model.Any())
+    {
+        <table>
+            <tr>
+                <th>Id
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th>Created By
+               
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>Remarks
+                </th>
+                <th>Action</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="50px">CP-@item.Id
+                    </td>
+                    <td width="150px">
+                        <b>@Html.ActionLink(item.Name, "Details", new { id = item.Id })</b>
+                    </td>
+                    <td class="tdType">
+                        @if (item.TypeId == 1)
+                        {
+                            @:<img src="@Url.Content("~/Images/email.png")" width="20" height="20" title="Email" />
+                }
+                        else
+                        {
+                            @:<img src="@Url.Content("~/Images/sms.png")" width="20" height="20" title="SMS" />
+                }
+                        <p class="small status">
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </p>
+                    </td>
+                    <td width="100px">
+                        @Html.DisplayFor(modelItem => item.CreatedBy)
+                    </td>
+                    <td class="tdStatus">
+
+                        @switch (item.StatusId)
+                        {
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.New):
+                                {
+                            @:<img src="@Url.Content("~/Images/new.png")" width="20" height="20" title="New" />
+                                 break;
+                                }
+
+
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.Approved):
+                                {
+                            @:<img src="@Url.Content("~/Images/approved.png")" width="32" height="32" title="Approved" />
+                                 break;
+                                }
+
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.Scheduled):
+                                {
+                            @:<img src="@Url.Content("~/Images/calendar.png")" width="20" height="20" title="Scheduled" />
+
+                                    break;
+                                }
+
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.Progress):
+                                {
+                            @:<img src="@Url.Content("~/Images/ajax-loader-red.gif")" width="20" height="20" title="Progress" />
+                                 break;
+                                }
+
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.Stopped):
+                                {
+                            @:<img src="@Url.Content("~/Images/stop.png")" width="20" height="20" title="New" />
+                                 break;
+                                }
+
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.Completed):
+                                {
+                            @:<img src="@Url.Content("~/Images/task_completed.png")" width="20" height="20" title="Completed" />
+                                 break;
+                                }
+
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.Rejected):
+                                {
+                            @:<img src="@Url.Content("~/Images/stop.png")" width="20" height="20" title="Rejected" />
+                                 break;
+                                }
+                        }
+                        <p class="small status">
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </p>
+                    </td>
+                    <td width="250px">
+
+                        @switch (item.StatusId)
+                        {
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.New):
+                                {
+                            <span class="small">Created on  @item.CreatedDate.ToShortDateString()</span>
+                                    break;
+                                }
+
+
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.Approved):
+                                {
+                            <span class="small">Created on  @item.CreatedDate.ToShortDateString()</span>
+                                    break;
+                                }
+
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.Scheduled):
+                                {
+                            <span class="small">Scheduled to run on
+                        @Html.DisplayFor(modelItem => item.StatusDate)</span>    
+                                    break;
+                                }
+
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.Progress):
+                                {
+                            <span class="small">Progess of:  @item.PercentComplete %</span>
+                                    break;
+                                }
+
+
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.Completed):
+                                {
+                            <span class="small">Completed on:  @item.StatusDate </span>
+                                    break;
+                                }
+
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.Stopped):
+                                {
+                            <span class="small">Stopped on  @item.StatusDate</span>
+                                    break;
+                                }
+
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.Rejected):
+                                {
+                            <span class="small">Rejected on  @item.StatusDate</span>
+                                    break;
+                                }
+
+                        }
+                    </td>
+                    <td width="250px" class="tdAction">
+                        <input type="hidden" name="name" value="@item.Id" class="hdnCampId" />
+                        <input type="hidden" name="name" value="@item.TypeId" class="hdnTypeId" />
+                        @switch (item.StatusId)
+                        {
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.New):
+                                {
+      
+                            @Html.Partial("Action/_EditAction", @item.Id)
+                            @Html.Partial("Action/_DeleteAction")
+                            @Html.Partial("Action/_DetailAction", @item.Id)
+                            @Html.Partial("Action/_TestAction")
+                                    break;
+                                }
+
+
+
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.Approved):
+                                {
+                            @Html.Partial("Action/_ScheduleNewAction")      
+                            @Html.Partial("Action/_DetailAction", @item.Id)
+                            @Html.Partial("Action/_TestAction") 
+                                    break;
+                                }
+
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.Rejected):
+                                {
+      
+                            @Html.Partial("Action/_EditAction", @item.Id)
+                                    break;
+                                }
+
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.Scheduled):
+                                {
+                            @Html.Partial("Action/_ReScheduleAction")
+                            @Html.Partial("Action/_DetailAction", @item.Id)
+                            @Html.Partial("Action/_TestAction")   
+                                    break;
+                                }
+
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.Progress):
+                                {
+                            @Html.Partial("Action/_StopAction")    
+                            @Html.Partial("Action/_DetailAction", @item.Id) 
+                            @Html.Partial("Action/_TestAction")  
+                                    break;
+                                }
+
+
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.Completed):
+                                {
+             
+                            @Html.Partial("Action/_DetailAction", @item.Id)
+                                    break;
+                                }
+
+                            case ((int)EP.BulkMessage.Service.Entity.Enum.CampaignStatus.Stopped):
+                                {
+                            @Html.Partial("Action/_ReScheduleAction")
+                            @Html.Partial("Action/_DetailAction")
+                                    break;
+                                }
+                        }
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+    else
+    {
+        <br />
+        <span>You have no campaigns.  @Html.ActionLink("Click here", "Create") to create one.    </span>   
+    }
+
+</div>
+
+<div id="dialogDelete" class="dialog" title="Confirm to Delete">Are you sure you want to delete the campaign?</div>
+<div id="dialogStop" class="dialog" title="Confirm to Stop">Are you sure you want to stop the campaign?</div>
+<div id="dialogTestMsg" class="dialog" title="Test Campaign ">
+    Please enter the recepient detail :<br />
+    <br />
+    <span id="lblMsgType"></span>
+    <input type="text" id="txtRecepient" name="name" value="" class="" />
+</div>
+<div id="dialogSchedule" class="dialog" title="Schedule campaign ">
+    Please enter the scheduled date and time for the campaign to run:
+     <input type="text" name="name" value=" " class="datepicker" />
+    <input type="text" name="name" value=" " class="timepicker" />
+</div>

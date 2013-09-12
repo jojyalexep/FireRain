@@ -1,0 +1,14 @@
+﻿@{
+    Layout = null;
+}
+<label>
+    File Headers
+</label>
+<div id="divHeaders">
+    <ul class="listdragable">
+        @foreach (var header in Model)
+        {
+            <li class="itemHeader">@header.Value</li>
+        }
+    </ul>
+</div>

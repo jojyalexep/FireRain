@@ -1,0 +1,52 @@
+﻿@model EP.BulkMessage.Presentation.Web.ViewModel.CampaignVM
+@{
+    Layout = null;
+}
+<h2>Sms Campaign</h2>
+@Html.Partial("FileUploader")
+@using (Ajax.BeginForm("Create", "Campaign", new AjaxOptions { UpdateTargetId="divReport", OnSuccess="ShowReport" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name)
+                <br />
+                @Html.ValidationMessageFor(m => m.Name)
+            </li>
+            <li>
+                <label id="lblRecipientField">
+                    Mobile Number Field
+                </label>
+                @Html.TextBoxFor(m => m.RecipientField)
+                <br />
+                @Html.ValidationMessageFor(m => m.RecipientField)
+            </li>
+
+            <li id="liSubject" style="@(Model.TypeId == 1 ? "" : "display:none")" class="clear">
+                @Html.LabelFor(m => m.Subject)
+                @Html.TextBoxFor(m => m.Subject)
+                <br />
+                @Html.ValidationMessageFor(m => m.Subject)
+            </li>
+            <li class="clear" id="liContent">
+                @Html.LabelFor(m => m.Content)
+                @Html.TextAreaFor(m => m.Content,4, 50, new { maxlength = "300" })
+                <i>Recommended message size is 160 letters</i>
+                @Html.ValidationMessageFor(m => m.Content)
+                
+            </li>
+
+        </ol>
+        <div class="form-button clear">
+            @Html.HiddenFor(p => p.Id)
+            @Html.HiddenFor(p => p.TypeId)
+            @Html.HiddenFor(p => p.Type, new { id = "hdnType" })
+            @Html.HiddenFor(p => p.FileName, new { id = "hdnFileName" })
+            <input type="submit" value="Validate" />
+            <input type="button" value="Cancel" onclick="history.back();" />
+        </div>
+    </fieldset>
+}

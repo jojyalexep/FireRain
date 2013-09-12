@@ -1,0 +1,48 @@
+﻿@model IEnumerable<EP.BulkMessage.Service.Entity.Schedule>
+
+@{
+    ViewBag.Title = "Schedules";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Schedules for Campaign</h2>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Frequency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailBatchSize)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SmsBatchSize)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Frequency)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailBatchSize)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SmsBatchSize)
+        </td>
+    </tr>
+}
+
+</table>

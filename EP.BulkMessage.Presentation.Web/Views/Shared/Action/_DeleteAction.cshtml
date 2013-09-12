@@ -1,0 +1,10 @@
+﻿@{
+    Layout = null;
+}
+ @if (UserPermission.UserHasPermission(UserPermission.DeleteCampaignPermission))
+    {
+<a href="#" class="btnDelete">Delete
+    @*<img src="~/Images/delete.png" width="16" height="16" title="Delete" />*@
+
+</a>
+ }

@@ -1,0 +1,15 @@
+﻿@model IEnumerable<EP.BulkMessage.Presentation.Web.Entity.KeyValue>
+@{
+    Layout = null;
+}
+<label>
+    File Headers (<i>Drag below box to respective fields</i>)
+</label>
+<div id="divHeaders">
+    <ul class="listdragable">
+        @foreach (var header in Model)
+        {
+            <li class="itemHeader">@header.Value</li>
+        }
+    </ul>
+</div>

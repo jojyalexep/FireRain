@@ -1,0 +1,43 @@
+﻿@model EP.BulkMessage.Presentation.Web.ViewModel.CampaignVM
+@section scripts{
+
+    @Styles.Render("~/Content/themes/base/css")
+
+}
+<fieldset>
+    <legend>Campaign</legend>
+
+    <div class="display-field">
+        <h1>Campaign: @Html.DisplayFor(model => model.Name) </h1>
+    </div>
+    <div class="display-field">
+        <h3>@Html.DisplayFor(model => model.Type) Campaign </h3>
+    </div>
+    <div class="display-label">
+        Status Date :   @Html.DisplayFor(model => model.StatusDate)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.CreatedDate):  @Html.DisplayFor(model => model.CreatedDate)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.CreatedBy):   @Html.DisplayFor(model => model.CreatedBy)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Status): @Html.DisplayFor(model => model.Status)
+    </div>
+</fieldset>
+<div class="action-menu">
+    @Html.ActionLink("Back to List", "Approval")
+</div>
+
+
+@if (ViewBag.EmailList != null)
+{
+    Html.RenderPartial("EmailList", (IEnumerable<EP.BulkMessage.Service.Entity.Email>)ViewBag.EmailList);
+}
+
+@if (ViewBag.SmsList != null)
+{
+    Html.RenderPartial("SmsList", (IEnumerable<EP.BulkMessage.Service.Entity.Sms>)ViewBag.SmsList);
+}
+

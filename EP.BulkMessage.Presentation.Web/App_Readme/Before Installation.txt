@@ -1,0 +1,5 @@
+Please follow the folowing steps before publishing this application:
+
+1. Ensure that .NET framework 4.5 is installed in the server
+2. AccessDatabaseEngine.exe should be installed for LinqToEXcel to work
+3. Enable 32-bit applications in the advanced settings of the application pool for LinqToExcel to work

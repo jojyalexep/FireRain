@@ -1,0 +1,11 @@
+﻿@model int
+@{
+    Layout = null;
+}
+@if (UserPermission.UserHasPermission(UserPermission.EditCampaignPermission))
+{
+    <a href="~/Campaign/Create/@Model">Edit
+    @*<img src="~/Images/edit.png" width="16" height="16" title="Edit" />*@
+
+    </a>
+}

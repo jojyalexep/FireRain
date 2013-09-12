@@ -1,0 +1,73 @@
+﻿@model EP.BulkMessage.Presentation.Web.ViewModel.CampaignVM
+@section scripts{
+
+    @Styles.Render("~/Content/themes/base/css")
+
+}
+<div class="action-menu">
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+<fieldset>
+    <legend>Campaign</legend>
+
+    <div class="display-field">
+       <h1>@Html.DisplayFor(model => model.Type) Campaign - @Html.DisplayFor(model => model.Name) </h1>
+    </div>
+
+    <div class="display-label">
+        Status : @Html.DisplayFor(model => model.Status)
+    </div>
+      <div class="display-label">
+        Last Updated on  : @Html.DisplayFor(model => model.StatusDate)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.CreatedDate):  @Html.DisplayFor(model => model.CreatedDate)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.CreatedBy):   @Html.DisplayFor(model => model.CreatedBy)
+    </div>
+</fieldset>
+
+
+<fieldset>
+    <legend>Summary</legend>
+
+    <div>
+        <table style="width:500px" border="1">
+            <tr>
+                <th style="width:400px"> <b>Status</b></th>
+                <th><b>Count</b></th>
+
+            </tr>
+            <tr>
+                <td>New</td>
+                <td>@Html.ActionLink((string)(ViewBag.NewStatus), "Export", new { campaignId = Model.Id, statusId = (int)EP.BulkMessage.Service.Entity.Enum.MessageStatus.New }, new { target="_blank" })</td>
+
+            </tr>
+            <tr>
+                <td>Send</td>
+                <td>@Html.ActionLink((string)ViewBag.Send,"Export",new { campaignId = Model.Id, statusId=(int)EP.BulkMessage.Service.Entity.Enum.MessageStatus.Send }, new { target="_blank" })</td>
+            </tr>
+            <tr>
+                <td>Failed</td>
+                <td>@Html.ActionLink((string)ViewBag.Failed,"Export",new { campaignId = Model.Id, statusId=(int)EP.BulkMessage.Service.Entity.Enum.MessageStatus.Failed }, new { target="_blank" })</td>
+            </tr>
+        </table>
+
+
+    </div>
+</fieldset>
+
+
+@*@if (ViewBag.EmailList != null)
+{
+    Html.RenderPartial("EmailList", (IEnumerable<EP.BulkMessage.Service.Entity.Email>)ViewBag.EmailList);
+}
+
+@if (ViewBag.SmsList != null)
+{
+    Html.RenderPartial("SmsList", (IEnumerable<EP.BulkMessage.Service.Entity.Sms>)ViewBag.SmsList);
+}
+*@

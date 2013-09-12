@@ -1,0 +1,75 @@
+﻿@model EP.BulkMessage.Presentation.Web.Models.LoginModel
+
+@{
+    ViewBag.Title = "Log in";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+<section id="loginForm">
+<h2>Use a local account to log in.</h2>
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Log in Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </li>
+            <li>
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+            </li>
+        </ol>
+        <input type="submit" value="Log in" />
+    </fieldset>@*
+    <p>
+        @Html.ActionLink("Register", "Register") if you don't have an account.
+    </p>*@
+}
+</section>
+
+<section class="social" id="socialLoginForm">
+   @* <h2>Use another service to log in.</h2>*@
+    @*@Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })*@
+</section>
+
+@section Scripts {
+    <script>
+        $(function (e) {
+            debugger;
+            if (navigator.sayswho[0] == "MSIE" && +navigator.sayswho[1] < 9) {
+                $("#loginForm").html("<h2>Cannot Login!!! Upgrade to Internet Explorer 9+, Chrome 24+ or Firefox 20+ </h2>");
+                alert("This browser is not supported!!!");
+            }
+
+        });
+
+        navigator.sayswho = (function () {
+            var N = navigator.appName, ua = navigator.userAgent, tem;
+            var M = ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+            if (M && (tem = ua.match(/version\/([\.\d]+)/i)) != null) M[2] = tem[1];
+            M = M ? [M[1], M[2]] : [N, navigator.appVersion, '-?'];
+
+            return M;
+        })();
+
+    </script>
+    
+    @Scripts.Render("~/bundles/jqueryval")
+
+    
+
+
+}

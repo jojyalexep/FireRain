@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EP.BulkMessage.Presentation.Web", "EP.BulkMessage.Presentation.Web\EP.BulkMessage.Presentation.Web.csproj", "{6BFCE860-4C5E-4004-8E32-F1D5F8FA71A2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E41E500E-ECFA-40D6-A671-A8C29E8E5FA1} = {E41E500E-ECFA-40D6-A671-A8C29E8E5FA1}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EP.BulkMessage.Service", "EP.BulkMessage.Service\EP.BulkMessage.Service.csproj", "{E41E500E-ECFA-40D6-A671-A8C29E8E5FA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EP.BulkMessage.Scheduler", "EP.BulkMessage.Scheduler\EP.BulkMessage.Scheduler.csproj", "{7894597E-DA6C-4B2B-BA6A-64DED6E63978}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FireRainScheduler", "FireRainScheduler\FireRainScheduler.csproj", "{D92AD276-AA33-4DB2-A2C9-E1F9EB72B23D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FireRainConsole", "FireRainConsole\FireRainConsole.csproj", "{D14ADB11-5183-4D04-A010-40FE0C6DC1AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6BFCE860-4C5E-4004-8E32-F1D5F8FA71A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BFCE860-4C5E-4004-8E32-F1D5F8FA71A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BFCE860-4C5E-4004-8E32-F1D5F8FA71A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BFCE860-4C5E-4004-8E32-F1D5F8FA71A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E41E500E-ECFA-40D6-A671-A8C29E8E5FA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E41E500E-ECFA-40D6-A671-A8C29E8E5FA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E41E500E-ECFA-40D6-A671-A8C29E8E5FA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E41E500E-ECFA-40D6-A671-A8C29E8E5FA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7894597E-DA6C-4B2B-BA6A-64DED6E63978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7894597E-DA6C-4B2B-BA6A-64DED6E63978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7894597E-DA6C-4B2B-BA6A-64DED6E63978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7894597E-DA6C-4B2B-BA6A-64DED6E63978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D92AD276-AA33-4DB2-A2C9-E1F9EB72B23D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D92AD276-AA33-4DB2-A2C9-E1F9EB72B23D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D92AD276-AA33-4DB2-A2C9-E1F9EB72B23D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D92AD276-AA33-4DB2-A2C9-E1F9EB72B23D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D14ADB11-5183-4D04-A010-40FE0C6DC1AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D14ADB11-5183-4D04-A010-40FE0C6DC1AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D14ADB11-5183-4D04-A010-40FE0C6DC1AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D14ADB11-5183-4D04-A010-40FE0C6DC1AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

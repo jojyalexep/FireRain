@@ -1,0 +1,19 @@
+﻿@model EP.BulkMessage.Presentation.Web.ViewModel.CampaignVM
+@{
+    Layout = null;
+}
+@using (Html.BeginForm("UploadFile", "Campaign", FormMethod.Post, new { id = "formUpload" }))
+{
+    <fieldset>
+        <ol>
+            <li class="clear">
+                <label>File</label>
+                <input type="file" name="File" id="fileExcel" onchange="UploadFile(this);" value=" " accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                <br />
+                Selected file is: <b id="spanFileName"> <a href="~/data/campaign/@Model.FileName" target="_blank">@Model.FileName</a> </b>
+            </li>
+            <li id="liHeader"></li>
+        </ol>
+    </fieldset>
+}
+

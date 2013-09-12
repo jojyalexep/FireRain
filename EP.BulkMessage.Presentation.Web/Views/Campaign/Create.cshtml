@@ -1,0 +1,56 @@
+﻿@model EP.BulkMessage.Presentation.Web.ViewModel.CampaignVM
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    <script src="~/Scripts/tinymce/tiny_mce.js"></script>
+    <script src="~/Scripts/jquery.form.min.js"></script>
+    <script src="~/Scripts/campaign-create.js"></script>
+}
+@if (ViewBag.Message != null)
+{
+    @section featured {
+        <section class="featured">
+            <div class="content-wrapper">
+                <b>@ViewBag.Message</b>
+            </div>
+        </section>
+    }
+}
+<h2>Create New Campaign</h2>
+<div id="create-campaign">
+
+
+    <div id="divCampaignType" style="@(Model.TypeId == 0 ? "" : "display:none;")">
+        <h3>Select Campaign Type</h3>
+        <div onclick="SelectCampaignType('CreateSms');">
+            <img src="~/Images/sms-big.png" />
+            <h4>Sms</h4>
+        </div>
+        <div onclick="SelectCampaignType('CreateEmail');">
+            <img src="~/Images/email-big.png" width="120" height="120" />
+            <h4>Email</h4>
+        </div>
+    </div>
+    <div id="divCreateDetail">
+        @if (Model.TypeId == (int)EP.BulkMessage.Service.Entity.Enum.CampaignType.Email)
+        {
+            @Html.Partial("CreateEmail", Model)
+        }
+        else if (Model.TypeId == (int)EP.BulkMessage.Service.Entity.Enum.CampaignType.SMS)
+        {
+            @Html.Partial("CreateSms", Model)
+        }
+    </div>
+    <div id="divReport">
+
+
+    </div>
+    <div id="divUploadLoad">
+        <img src="~/Images/ajax-loader-red.gif" width="16" height="16" />
+        Loading...
+    </div>
+</div>

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns="http://services.epg.intranet" xmlns:ns1="http://org.apache.axis2/xsd" targetNamespace="http://services.epg.intranet" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>
+		To serve all middleware services
+	</wsdl:documentation>
+  <wsdl:types>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://services.epg.intranet">
+      <xs:element name="healthCheckResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="doService">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="uname" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="passwd" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="requestXML" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="doServiceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="doSMS">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="uname" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="passwd" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="receiver" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="doSMSResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="doBulkSMS">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="uname" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="passwd" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="receiver" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="topic" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="doBulkSMSResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="doServiceRequest">
+    <wsdl:part name="parameters" element="ns:doService" />
+  </wsdl:message>
+  <wsdl:message name="doServiceResponse">
+    <wsdl:part name="parameters" element="ns:doServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="healthCheckRequest" />
+  <wsdl:message name="healthCheckResponse">
+    <wsdl:part name="parameters" element="ns:healthCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="doBulkSMSRequest">
+    <wsdl:part name="parameters" element="ns:doBulkSMS" />
+  </wsdl:message>
+  <wsdl:message name="doBulkSMSResponse">
+    <wsdl:part name="parameters" element="ns:doBulkSMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="doSMSRequest">
+    <wsdl:part name="parameters" element="ns:doSMS" />
+  </wsdl:message>
+  <wsdl:message name="doSMSResponse">
+    <wsdl:part name="parameters" element="ns:doSMSResponse" />
+  </wsdl:message>
+  <wsdl:portType name="MiddlewareServicePortType">
+    <wsdl:operation name="doService">
+      <wsdl:input wsaw:Action="urn:doService" message="ns:doServiceRequest" />
+      <wsdl:output wsaw:Action="urn:doServiceResponse" message="ns:doServiceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="healthCheck">
+      <wsdl:input wsaw:Action="urn:healthCheck" message="ns:healthCheckRequest" />
+      <wsdl:output wsaw:Action="urn:healthCheckResponse" message="ns:healthCheckResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="doBulkSMS">
+      <wsdl:input wsaw:Action="urn:doBulkSMS" message="ns:doBulkSMSRequest" />
+      <wsdl:output wsaw:Action="urn:doBulkSMSResponse" message="ns:doBulkSMSResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="doSMS">
+      <wsdl:input wsaw:Action="urn:doSMS" message="ns:doSMSRequest" />
+      <wsdl:output wsaw:Action="urn:doSMSResponse" message="ns:doSMSResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MiddlewareServiceSoap11Binding" type="ns:MiddlewareServicePortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="healthCheck">
+      <soap:operation soapAction="urn:healthCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doService">
+      <soap:operation soapAction="urn:doService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doBulkSMS">
+      <soap:operation soapAction="urn:doBulkSMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doSMS">
+      <soap:operation soapAction="urn:doSMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MiddlewareServiceSoap12Binding" type="ns:MiddlewareServicePortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="healthCheck">
+      <soap12:operation soapAction="urn:healthCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doService">
+      <soap12:operation soapAction="urn:doService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doBulkSMS">
+      <soap12:operation soapAction="urn:doBulkSMS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doSMS">
+      <soap12:operation soapAction="urn:doSMS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MiddlewareServiceHttpBinding" type="ns:MiddlewareServicePortType">
+    <http:binding verb="POST" />
+    <wsdl:operation name="healthCheck">
+      <http:operation location="MiddlewareService/healthCheck" />
+      <wsdl:input>
+        <mime:content part="healthCheck" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="healthCheck" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doService">
+      <http:operation location="MiddlewareService/doService" />
+      <wsdl:input>
+        <mime:content part="doService" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="doService" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doBulkSMS">
+      <http:operation location="MiddlewareService/doBulkSMS" />
+      <wsdl:input>
+        <mime:content part="doBulkSMS" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="doBulkSMS" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doSMS">
+      <http:operation location="MiddlewareService/doSMS" />
+      <wsdl:input>
+        <mime:content part="doSMS" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="doSMS" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MiddlewareService">
+    <wsdl:port name="MiddlewareServiceHttpSoap11Endpoint" binding="ns:MiddlewareServiceSoap11Binding">
+      <soap:address location="http://intranet:80/wservices/services/MiddlewareService.MiddlewareServiceHttpSoap11Endpoint/" />
+    </wsdl:port>
+    <wsdl:port name="MiddlewareServiceHttpSoap12Endpoint" binding="ns:MiddlewareServiceSoap12Binding">
+      <soap12:address location="http://intranet:80/wservices/services/MiddlewareService.MiddlewareServiceHttpSoap12Endpoint/" />
+    </wsdl:port>
+    <wsdl:port name="MiddlewareServiceHttpEndpoint" binding="ns:MiddlewareServiceHttpBinding">
+      <http:address location="http://intranet:80/wservices/services/MiddlewareService.MiddlewareServiceHttpEndpoint/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

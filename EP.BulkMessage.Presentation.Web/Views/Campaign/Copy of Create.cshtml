@@ -1,0 +1,123 @@
+﻿@model EP.BulkMessage.Presentation.Web.ViewModel.CampaignVM
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    <link href="~/Content/jquery.timepicker.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.timepicker.min.js"></script>
+    <script src="~/Scripts/tinymce/tiny_mce.js"></script>
+    @Styles.Render("~/Content/themes/base/css")
+    <script>
+        tinyMCE.init({
+            // General options
+            mode: "textareas",
+            theme: "advanced",
+            plugins: "autolink,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave,visualblocks",
+            editor_selector: "text-tinymce",
+            // Theme options
+            theme_advanced_buttons1: "bold,italic,underline,strikethrough,|,hr,removeformat,|,ltr,rtl,|,fullscreen",
+            theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,cleanup,code,preview",
+            theme_advanced_toolbar_location: "top",
+            theme_advanced_toolbar_align: "left",
+            theme_advanced_statusbar_location: "bottom",
+            theme_advanced_resizing: true,
+            forced_root_block: ''
+        });
+        $(document).ready(function (e) {
+            $("#ddlType").change(function (e) {
+                if ($(this).val() == "1") {
+                    $("#lblRecipientField").html("Email Field");
+                    $("#liSubject").show();
+                }
+                else {
+                    $("#lblRecipientField").html("Mobile Number Field");
+                    $("#liSubject").hide();
+                }
+            });
+            $(".datepicker").datepicker();
+            $('#timepicker').timepicker({ 'scrollDefaultNow': true });
+
+        });
+    </script>
+
+
+}
+@if (ViewBag.Message != null)
+{
+    @section featured {
+        <section class="featured">
+            <div class="content-wrapper">
+                @ViewBag.Message
+            </div>
+        </section>
+    }
+}
+
+@using (Html.BeginForm("Create", "Campaign", FormMethod.Post, new { enctype = "multipart/form-data", id="create-campaign" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <h2>Create New Campaign</h2>
+    <fieldset>
+        <legend>Log in Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name)
+<br />
+                @Html.ValidationMessageFor(m => m.Name)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.File)
+                <input type="file" name="File" value=" " accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                <br />
+                @Html.ValidationMessageFor(m => m.File)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.TypeId)
+                @Html.DropDownListFor(m => m.TypeId, (SelectList)ViewBag.CampaignTypes, new { id = "ddlType" })
+                <br />
+                @Html.ValidationMessageFor(m => m.TypeId)
+            </li>
+            <li>
+                <label id="lblRecipientField">
+                    @if (Model.TypeId == 1)
+                    {
+                        <text>Email Field</text>
+                    
+                    }
+
+                    else
+                    {
+                        <text>Mobile Number Field</text>
+                    }
+
+                </label>
+                @Html.TextBoxFor(m => m.RecipientField)
+                <br />
+                @Html.ValidationMessageFor(m => m.RecipientField)
+            </li>
+           
+            <li id="liSubject" style="@(Model.TypeId == 1 ? "" : "display:none")" class="clear">
+                @Html.LabelFor(m => m.Subject)
+                @Html.TextBoxFor(m => m.Subject)
+                <br /> 
+                @Html.ValidationMessageFor(m => m.Subject)
+            </li>
+            <li  class="clear">
+                @Html.LabelFor(m => m.Content)
+                @Html.TextAreaFor(m => m.Content, new { @class = "text-tinymce", id = "contentEditor" })
+                @Html.ValidationMessageFor(m => m.Content)
+            </li>
+            
+        </ol>
+        <div class="form-button clear">
+            @Html.HiddenFor(p => p.Id)
+            <input type="submit" value="Validate" />
+            <input type="button" value="Cancel" onclick="history.back();" />
+        </div>
+    </fieldset>
+}
